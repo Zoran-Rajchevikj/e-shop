@@ -1,0 +1,121 @@
+/* root и html/body */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+#root {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Wrapper кој го пополнува целиот екран */
+.product-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;        /* Заменивме 100vh со 100% за да следи body */
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Слика */
+#img-div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;         /* простор околу сликата */
+    background-color: #fff;
+    overflow: hidden;      /* за да не излегува надвор ако scale-ираш */
+}
+
+#img-div img {
+    max-width: 80%;        /* не го пополнува целиот div */
+    max-height: 80%;       /* остава простор горе/долу */
+    object-fit: contain;    /* целиот продукт се гледа, без да се сече */
+    transition: transform 0.3s ease;
+}
+
+#img-div img:hover {
+    transform: scale(1.05); /* мал hover zoom за динамика */
+}
+
+
+/* Информации за продуктот */
+#info-div {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/* Текст и елементи */
+#info-div span {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+#info-div p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+#info-div select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    width: 150px;
+    cursor: pointer;
+}
+
+#info-div select:focus {
+    border-color: #1976d2;
+    outline: none;
+}
+
+/* Quantity input */
+#info-div .MuiBox-root {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#info-div .MuiTextField-root {
+    width: 100px;
+}
+
+/* Add to cart button */
+#info-div .MuiButton-root {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+#info-div .MuiButton-root:hover {
+    background-color: #155a9c;
+}
+
+/* Мобилен изглед */
+@media (max-width: 900px) {
+    .product-wrapper {
+        flex-direction: column;
+    }
+
+    #img-div, #info-div {
+        width: 100%;
+        height: 50vh; /* За да не предизвика scrollbar */
+    }
+
+    #info-div {
+        padding: 20px;
+    }
+}

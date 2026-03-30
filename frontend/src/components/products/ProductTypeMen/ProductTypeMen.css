@@ -1,0 +1,40 @@
+.product-men-container {
+    padding: 2rem;
+}
+
+.product-types-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.product-type-card {
+    position: relative;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.25s ease;
+}
+
+.product-type-card:hover {
+    transform: scale(1.03);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay span {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
