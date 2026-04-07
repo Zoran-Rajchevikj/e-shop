@@ -10,6 +10,6 @@ public enum ProductType {
         PANTALONI,
         HELANKI,
         GRADNIK,
-        KAUPUT,
+        KAPUT,
         FUSTAN
 }

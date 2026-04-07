@@ -15,6 +15,7 @@ import ProductTypeWomen from "./components/products/ProductTypeWomen/ProductType
 import ProductWomen from "./components/products/ProductWomen/ProductWomen.tsx";
 import CartPage from "./pages/CartPage/CartPage.tsx";
 import {ToastContainer} from "react-toastify";
+import AdminPanel from "./components/AdminPanel/AdminPanel.tsx";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
                         <Route path="/products/:id" element={<ProductDetails/>}></Route>
                         <Route path="/product-men" element={<ProductTypeMen/>}></Route>
                         <Route path="/product-women" element={<ProductTypeWomen/>}></Route>
+                        <Route path="/adminPanel" element={<AdminPanel/>}></Route>
                         {/*<Route path="/product-kids" element={<ProductTypeKids/>}></Route>*/}
                         <Route path="/cart" element={<CartPage/>} ></Route>
                     </Route>

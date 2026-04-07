@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -25,6 +26,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product product) {
+        Optional<Product> existing = productRepository.findByNameAndDescriptionAndGenderTypeAndProductType(
+                product.getName(),
+                product.getDescription(),
+                product.getGenderType(),
+                product.getProductType());
+        if(existing.isPresent()){
+           throw new IllegalArgumentException("Product already exists!");
+        }
         return productRepository.save(product);
     }
 
