@@ -24,7 +24,8 @@ export enum ProductType {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 export enum Size{
-    XS, S, M, L, XL, XXL
+
+    XS="XS", S="S", M="M", L="L", XL="XL", XXL="XLL"
 }
 export const ProductTypeLabel: Record<ProductType, string> = {
     [ProductType.MAICA]: "Маица",

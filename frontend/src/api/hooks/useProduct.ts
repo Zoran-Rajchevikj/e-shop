@@ -28,15 +28,18 @@ const useProduct = () => {
             .catch((error) => console.log(error));
     }, [])
 
-    const addProduct = useCallback((data:CreateProduct) => {
-        productRepository
-            .addProduct(data)
-            .then(() => {
-                console.log("Successfully added a new products.");
+    const addProduct = useCallback(async (data:CreateProduct) => {
+            try {
+                const response =await productRepository.addProduct(data)
+                console.log(response)
                 getAllProducts();
-            })
-            .catch((error) => console.log(error));
-    },[getAllProducts])
+                return response;
+            } catch (error) {
+                console.log(error)
+                throw error;
+            }
+        },[getAllProducts]
+    )
 
     const deleteProduct = useCallback((id:number) => {
         productRepository
