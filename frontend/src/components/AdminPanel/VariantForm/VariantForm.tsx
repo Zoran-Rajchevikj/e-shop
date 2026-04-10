@@ -1,9 +1,9 @@
 
 import type {CreateProductVariant} from "../../../models/variant/CreateProductVariant.ts";
-import {useState} from "react";
+import React, {useState} from "react";
 import {  Size} from "../../../models/enums.ts";
 import useProductVariant from "../../../api/hooks/useProductVariant.ts";
-import * as test from "node:test";
+
 
 type ProductVariantState= {
 
@@ -27,7 +27,7 @@ const initialForm :ProductVariantState={
 const VariantForm = ({productId}:Props)=> {
     const[formData,setFormData]=useState(initialForm);
     const {addVariant} = useProductVariant(productId);
-    const handleSubmit= (e) =>{
+    const handleSubmit= (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         const priceNum = Number(formData.price);
         const stockNum = Number(formData.stock);
@@ -54,7 +54,7 @@ const VariantForm = ({productId}:Props)=> {
         }
 
     }
-    const handleChange = (event) => {
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = event.target;
         setFormData({...formData, [name]: name === "price" || name==="stock"?Number(value):value});
     }

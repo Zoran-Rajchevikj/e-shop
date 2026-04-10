@@ -24,6 +24,7 @@ const initialVariantState :Variant = {
 const useProductVariant = (productId:number) => {
     const [variants, setVariants] = useState<ProductVariantState>(initialState);
     const [variant, setVariant] = useState<Variant>(initialVariantState);
+
     const getAllProductVariants = useCallback(() => {
         variantRepository
             .getAllVariantsByProduct(productId)
@@ -56,6 +57,7 @@ const useProductVariant = (productId:number) => {
             })
             .catch((error) => console.log(error));
     },[getAllProductVariants]);
+
     const updatePrice = useCallback((id:number,price:number) => {
         variantRepository
             .updatePrice(id, price)
@@ -65,6 +67,7 @@ const useProductVariant = (productId:number) => {
             })
             .catch((error) => console.log(error));
     },[getAllProductVariants]);
+
     const updateStock = useCallback((id:number,stock:number) => {
         variantRepository
             .updateStock(id, stock)
@@ -74,6 +77,7 @@ const useProductVariant = (productId:number) => {
             })
             .catch((error) => console.log(error));
     },[getAllProductVariants]);
+
     const decreaseStock = useCallback((id:number,quantity:number) => {
         variantRepository
             .decreaseStock(id, quantity)
@@ -83,6 +87,7 @@ const useProductVariant = (productId:number) => {
             })
             .catch((error) => console.log(error));
     },[getAllProductVariants]);
+
     const getVariantById = useCallback((id:number) => {
         variantRepository
             .getById(id)
@@ -95,6 +100,7 @@ const useProductVariant = (productId:number) => {
             })
             .catch((error) => console.log(error));
     },[])
+
     useEffect(() => {
         getAllProductVariants();
     }, [getAllProductVariants]);

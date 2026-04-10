@@ -44,7 +44,11 @@ function App() {
                         <Route path="/products/:id" element={<ProductDetails/>}></Route>
                         <Route path="/product-men" element={<ProductTypeMen/>}></Route>
                         <Route path="/product-women" element={<ProductTypeWomen/>}></Route>
-                        <Route path="/adminPanel" element={<AdminPanel/>}></Route>
+                          <Route element={<ProtectedRoute requiredRole={"ROLE_ADMIN"}/>}>
+                            <Route path="/adminPanel" element={<AdminPanel/>}></Route>
+                              <Route path="/admin/product/:id" ></Route> // add element
+                         </Route>
+
                         {/*<Route path="/product-kids" element={<ProductTypeKids/>}></Route>*/}
                         <Route path="/cart" element={<CartPage/>} ></Route>
                     </Route>

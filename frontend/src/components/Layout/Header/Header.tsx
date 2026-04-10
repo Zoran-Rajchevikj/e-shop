@@ -35,7 +35,7 @@ const Header = () => {
     const [search, setSearch] = useState<string>('');
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const navigate = useNavigate();
-    const { logout, isAuthenticated,user} = useAuth();
+    const { logout, isAuthenticated,user,role} = useAuth();
 
 
 
@@ -133,7 +133,9 @@ const Header = () => {
                    Logout
                </button>
                </>
-
+            )}
+            {role === "ROLE_ADMIN" && (
+                <button onClick={() => navigate("/adminPanel")}>Admin Panel</button>
             )}
         </header>
     )

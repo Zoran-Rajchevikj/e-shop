@@ -1,16 +1,17 @@
 import ProductForm from "./ProductForm/ProductForm.tsx";
 import VariantForm from "./VariantForm/VariantForm.tsx";
 import {useState} from "react";
+import ShowProducts from "../products/ShowProducts/ShowProducts.tsx";
 
 
 const AdminPanel= () => {
     const [createdProductId, setCreatedProductId] = useState<number | null>(null);
-    console.log(createdProductId)
+
     return (
         <>
-            <ProductForm onProductCreated={setCreatedProductId}/>
-            {createdProductId &&  <VariantForm productId={createdProductId}/>}
-
+            {/*<ProductForm onProductCreated={setCreatedProductId}/>*/}
+            {/*{createdProductId &&  <VariantForm productId={createdProductId}/>}*/}
+            <ShowProducts administrator={true}/>
         </>
     )
 }

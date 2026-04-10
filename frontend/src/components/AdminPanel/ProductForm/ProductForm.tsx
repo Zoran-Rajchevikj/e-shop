@@ -1,5 +1,5 @@
 import {GenderType, ProductType} from "../../../models/enums.ts";
-import {useState} from "react";
+import React, {useState} from "react";
 import useProduct from "../../../api/hooks/useProduct.ts";
 import type {CreateProduct} from "../../../models/product/CreateProduct.ts";
 
@@ -46,12 +46,12 @@ const productTypesByGender: Record<GenderType, ProductType[]>={
 const ProductForm = ({onProductCreated}:Props)=>{
     const [formData,setFormData]=useState(initialForm);
     const {addProduct} = useProduct();
-    const handleChange = (event)=>{
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const {name,value}=event.target;
         setFormData({...formData, [name]:value});
     }
 
-    const handleSubmit = async (e)=>{
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if(!formData.genderType || !formData.productType || !formData.name || !formData.description){
             alert("Please populate all fields");

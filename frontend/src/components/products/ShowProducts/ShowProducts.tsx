@@ -3,18 +3,21 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useFilterProducts} from "../../../api/hooks/useFilterProducts.ts";
 
 interface Props{
-    genderType:GenderType,
+    genderType?:GenderType,
+    administrator?:boolean
 }
 
-const ShowProducts = ({genderType}:Props) => {
+const ShowProducts = ({genderType, administrator=false}:Props) => {
     const navigate = useNavigate();
     const {productType} = useParams();
+
     const {products,loading} = useFilterProducts({
         genderType: genderType,
-        productType:productType,
+        productType: administrator ? undefined : productType,
         page:0,
-        size:10,
+        size:administrator? 100 : 10,
     })
+
     if (loading) {
         return (
             <div className="pm-loading-container">
@@ -28,7 +31,11 @@ const ShowProducts = ({genderType}:Props) => {
                 <button onClick={() => navigate(-1)} className="pm-back-btn">
                     ← Назад
                 </button>
-                <h1>{ProductTypeLabel[productType as keyof typeof ProductTypeLabel]}</h1>
+                <h1>
+                    {administrator?
+                        "All Products" :
+                        ProductTypeLabel[productType as keyof typeof ProductTypeLabel]}
+                    </h1>
                 <p className="pm-product-count">{products.length} производи</p>
             </div>
 
@@ -38,7 +45,8 @@ const ShowProducts = ({genderType}:Props) => {
                         key={product.id}
                         className="pm-product-card"
 
-                        onClick={() => navigate(`/products/${product.id}`)}
+                        onClick={() =>{
+                            navigate(administrator ? `/admin/product/${product.id}` : `/products/${product.id}`)} }
                     >
                         <div className="pm-product-image-wrapper">
                             <img

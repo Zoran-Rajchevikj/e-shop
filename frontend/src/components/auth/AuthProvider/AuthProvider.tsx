@@ -11,7 +11,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
     const [user, setUser] = useState<string | null>(null);
     const [role, setRole] = useState<string | null>(null);
-
+    const [loading, setLoading] = useState(true);
     const extractRoleFromToken = (decodedPayload: any) => {
         try {
             const rolesArray = decodedPayload.roles;
@@ -52,8 +52,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
                 setRole(null);
                 localStorage.removeItem("token");
             }
-
         }
+        setLoading(false);
     }, []);
 
     // Кога ќе се позове login функцијата
@@ -86,7 +86,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         login,
         logout,
         user,
-        role
+        role,
+        loading
     };
 
 

@@ -7,7 +7,8 @@ interface AuthContextValue{
     login:(token:string)=>void,
     logout:() => void,
     user:string|null,
-    role:string|null
+    role:string|null,
+    loading:boolean,
 }
 
 
@@ -18,6 +19,7 @@ const AuthContext = React.createContext<AuthContextValue>({
     logout: () => {},
     user: null,
     role: null,
+    loading: true,
 });
 
 export default AuthContext;
