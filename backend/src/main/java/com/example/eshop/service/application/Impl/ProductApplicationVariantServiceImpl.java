@@ -2,6 +2,7 @@ package com.example.eshop.service.application.Impl;
 
 import com.example.eshop.dto.CreateProductVariantDTO;
 import com.example.eshop.dto.DisplayProductVariantDTO;
+import com.example.eshop.dto.UpdateProductVariantDTO;
 import com.example.eshop.model.domain.Product;
 import com.example.eshop.model.domain.ProductVariant;
 import com.example.eshop.service.application.ProductApplicationVariantService;
@@ -60,6 +61,12 @@ public class ProductApplicationVariantServiceImpl implements ProductApplicationV
     @Override
     public DisplayProductVariantDTO updateStock(Long variantId, Integer newStock) {
         ProductVariant updated = productVariantService.updateStock(variantId, newStock);
+        return DisplayProductVariantDTO.from(updated);
+    }
+
+    @Override
+    public DisplayProductVariantDTO updateVariant(Long variantId, UpdateProductVariantDTO variantDTO) {
+        ProductVariant updated = productVariantService.updateVariant(variantId,variantDTO.color(),variantDTO.stock(),variantDTO.size(),variantDTO.price());
         return DisplayProductVariantDTO.from(updated);
     }
 

@@ -13,6 +13,7 @@ interface FilterParams{
     productSize?: string;
     page?: number;
     size?: number;
+    refreshKey?:number;
 }
 interface UseFilterProductsResult {
     products: Product[];
@@ -55,7 +56,8 @@ export const useFilterProducts = (filters : FilterParams):UseFilterProductsResul
         filters.color,
         filters.productSize,
         filters.page,
-        filters.size
+        filters.size,
+        filters.refreshKey,
     ]);
 
     return { products, loading };

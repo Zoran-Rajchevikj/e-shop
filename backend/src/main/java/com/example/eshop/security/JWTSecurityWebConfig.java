@@ -60,7 +60,8 @@ public class JWTSecurityWebConfig {
                                         "/api/variants/variant/decreaseStock",
                                         "/api/variants/add",
                                         "/api/variants/delete",
-                                        "/api/variants/update"
+                                        "/api/variants/update",
+                                        "/api/variants/update/variant/**"
                                 ).hasRole("ADMIN")
                         // Endpoints that require any authenticated user
                         .requestMatchers(

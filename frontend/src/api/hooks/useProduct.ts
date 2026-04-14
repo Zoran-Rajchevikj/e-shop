@@ -30,7 +30,7 @@ const useProduct = () => {
 
     const addProduct = useCallback(async (data:CreateProduct) => {
             try {
-                const response =await productRepository.addProduct(data)
+                const response = await productRepository.addProduct(data)
                 console.log(response)
                 getAllProducts();
                 return response;

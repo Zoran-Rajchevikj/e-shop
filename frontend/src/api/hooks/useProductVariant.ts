@@ -3,6 +3,7 @@ import {useCallback, useEffect, useState} from "react";
 import type {DisplayProductVariant} from "../../models/variant/DisplayProductVariant.ts";
 import variantRepository from "../repository/variantRepository.ts";
 import type {CreateProductVariant} from "../../models/variant/CreateProductVariant.ts";
+import type {UpdateProductVariant} from "../../models/variant/UpdateProductVariant.ts";
 
 
 interface ProductVariantState{
@@ -11,7 +12,7 @@ interface ProductVariantState{
 }
 const initialState :ProductVariantState={
     variants:[],
-        loading: true
+    loading: true
 }
 interface Variant{
     variant:DisplayProductVariant|null;
@@ -38,8 +39,8 @@ const useProductVariant = (productId:number) => {
             .catch((error) => console.log(error));
     }, [productId]);
 
-    const addVariant = useCallback((data:CreateProductVariant) => {
-        variantRepository
+    const addVariant = useCallback(async (data:CreateProductVariant) => {
+      await  variantRepository
             .addVariant(data)
             .then(() => {
                 console.log("Successfully added a new variant.");
@@ -48,8 +49,8 @@ const useProductVariant = (productId:number) => {
             .catch((error) => console.log(error));
     },[getAllProductVariants]);
 
-    const deleteVariantById = useCallback((id:number) => {
-        variantRepository
+    const deleteVariantById = useCallback(async (id:number) => {
+        await variantRepository
             .deleteById(id)
             .then(() => {
                 console.log("Successfully deleted a variant.");
@@ -58,6 +59,15 @@ const useProductVariant = (productId:number) => {
             .catch((error) => console.log(error));
     },[getAllProductVariants]);
 
+    const updateVariant = useCallback(async (id:number,data:UpdateProductVariant) => {
+        await variantRepository
+            .updateProductVariant(id,data)
+            .then(() => {
+                getAllProductVariants();
+                console.log("Successfully updated variant.");
+            })
+            .catch((error) => console.log(error));
+    },[getAllProductVariants]);
     const updatePrice = useCallback((id:number,price:number) => {
         variantRepository
             .updatePrice(id, price)
@@ -106,7 +116,7 @@ const useProductVariant = (productId:number) => {
     }, [getAllProductVariants]);
 
     return {
-       variant, ...variants,getAllProductVariants,addVariant,deleteVariantById,updatePrice,updateStock,decreaseStock,getVariantById
+       variant, ...variants,getAllProductVariants,addVariant,updateVariant,deleteVariantById,updatePrice,updateStock,decreaseStock,getVariantById
     }
 }
 

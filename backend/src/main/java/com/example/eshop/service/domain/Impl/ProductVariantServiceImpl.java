@@ -2,6 +2,7 @@ package com.example.eshop.service.domain.Impl;
 
 import com.example.eshop.model.domain.Product;
 import com.example.eshop.model.domain.ProductVariant;
+import com.example.eshop.model.enums.Size;
 import com.example.eshop.model.exception.NotEnoughStockAvailable;
 import com.example.eshop.model.exception.VariantNotFoundException;
 import com.example.eshop.repository.ProductVariantRepository;
@@ -56,6 +57,25 @@ public class ProductVariantServiceImpl implements ProductVariantService {
                 .orElseThrow(() -> new VariantNotFoundException(variantId));
         productVariant.setStock(newStock);
         return productVariantRepository.save(productVariant);
+    }
+
+    @Override
+    public ProductVariant updateVariant(Long variantId, String color, Integer stock, Size size, BigDecimal price) {
+        ProductVariant existing = productVariantRepository.findById(variantId).orElseThrow(() -> new VariantNotFoundException(variantId));
+
+        if(stock < 0){
+            throw new IllegalArgumentException ();
+        }
+        if(price.compareTo(BigDecimal.ZERO)<=0) {
+            throw new IllegalArgumentException();
+        }
+
+        existing.setColor(color);
+        existing.setStock(stock);
+        existing.setPrice(price);
+        existing.setSize(size);
+
+        return productVariantRepository.save(existing);
     }
 
     @Override

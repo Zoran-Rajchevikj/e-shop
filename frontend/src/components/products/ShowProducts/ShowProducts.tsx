@@ -4,10 +4,12 @@ import {useFilterProducts} from "../../../api/hooks/useFilterProducts.ts";
 
 interface Props{
     genderType?:GenderType,
-    administrator?:boolean
+    administrator?:boolean,
+    refreshKey?:number,
+
 }
 
-const ShowProducts = ({genderType, administrator=false}:Props) => {
+const ShowProducts = ({genderType, administrator=false,refreshKey }:Props) => {
     const navigate = useNavigate();
     const {productType} = useParams();
 
@@ -16,6 +18,7 @@ const ShowProducts = ({genderType, administrator=false}:Props) => {
         productType: administrator ? undefined : productType,
         page:0,
         size:administrator? 100 : 10,
+        refreshKey
     })
 
     if (loading) {

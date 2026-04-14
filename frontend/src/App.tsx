@@ -16,6 +16,7 @@ import ProductWomen from "./components/products/ProductWomen/ProductWomen.tsx";
 import CartPage from "./pages/CartPage/CartPage.tsx";
 import {ToastContainer} from "react-toastify";
 import AdminPanel from "./components/AdminPanel/AdminPanel.tsx";
+import ShowProduct from "./components/AdminPanel/ShowProduct/ShowProduct.tsx";
 
 
 function App() {
@@ -36,8 +37,8 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/" element={<Layout/>}>
-                    <Route index element={<HomePage/>}/>
                     <Route element={<ProtectedRoute/>}>
+                        <Route index element={<HomePage/>}/>
                         <Route path="/products" element={<ProductsPage />} />
                         <Route path="/product-men/:productType" element={<ProductMen/>}></Route>
                         <Route path="/product-women/:productType" element={<ProductWomen/>}></Route>
@@ -46,7 +47,7 @@ function App() {
                         <Route path="/product-women" element={<ProductTypeWomen/>}></Route>
                           <Route element={<ProtectedRoute requiredRole={"ROLE_ADMIN"}/>}>
                             <Route path="/adminPanel" element={<AdminPanel/>}></Route>
-                              <Route path="/admin/product/:id" ></Route> // add element
+                              <Route path="/admin/product/:id" element={<ShowProduct/>}></Route> // add element
                          </Route>
 
                         {/*<Route path="/product-kids" element={<ProductTypeKids/>}></Route>*/}

@@ -2,6 +2,7 @@ package com.example.eshop.web;
 
 import com.example.eshop.dto.CreateProductVariantDTO;
 import com.example.eshop.dto.DisplayProductVariantDTO;
+import com.example.eshop.dto.UpdateProductVariantDTO;
 import com.example.eshop.service.application.ProductApplicationVariantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,11 @@ public class ProductVariantController {
     public ResponseEntity<DisplayProductVariantDTO> createVariant(@RequestBody CreateProductVariantDTO variant) {
         DisplayProductVariantDTO created = productApplicationVariantService.createVariant(variant);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+    @PutMapping("/update/variant/{id}")
+    public ResponseEntity<DisplayProductVariantDTO> updateVariant(@PathVariable long id, @RequestBody UpdateProductVariantDTO dto){
+        DisplayProductVariantDTO updated = productApplicationVariantService.updateVariant(id,dto);
+        return ResponseEntity.ok(updated);
     }
 
     @PutMapping("/update/{id}/price")
